@@ -1,0 +1,11 @@
+﻿<form asp-controller="Account" method="post">
+    <label>Account id:</label>
+    <input type="text" name="accountId" />
+    <br />
+    <label>Amount:</label>
+    <input type="text" name="amount" />
+    <br />
+    <br />
+    <input type="submit" asp-action="Deposit" value="Deposit" />
+    <input type="submit" asp-action="Withdraw" value="Withdraw" />
+</form>
