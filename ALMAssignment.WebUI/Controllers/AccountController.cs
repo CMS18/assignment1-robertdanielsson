@@ -76,6 +76,5 @@ namespace ALMAssignment.WebUI.Controllers
 
             return RedirectToAction("Transfer");
         }
-
     }
 }
