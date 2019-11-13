@@ -1,8 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model ALMAssignment.WebUI.Models.ViewModels.CustomerAccountViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table>
+    <tr>
+        <td>CustomerId</td>
+        <td>CustomerName</td>
+        <td>AccountId</td>
+        <td>Balance</td>
+    </tr>
+    @foreach (var customer in Model.Customers)
+    {
+        <tr>
+            <td>@customer.CustomerID</td>
+            <td>@customer.CustomerName</td>
+            @foreach (var account in Model.Accounts)
+            {
+                if (customer.CustomerID == account.CustomerID)
+                {
+                    <td>@account.AccountID</td>
+                    <td>@account.Balance</td>
+                }
+            }
+        </tr>
+    }
+</table>
