@@ -1,11 +1,13 @@
 ﻿<form asp-controller="Account" method="post">
-    <label>Account id:</label>
-    <input type="text" name="accountId" />
+    <label>Transfer from Account id:</label>
+    <input type="text" name="accountIdFrom" />
+    <br />
+    <label>Transfer to Account id:</label>
+    <input type="text" name="accountIdTo" />
     <br />
     <label>Amount:</label>
-    <input type="text" name="amount" />
+    <input type="text" name="transferAmount" />
     <br />
     <br />
-    <input type="submit" asp-action="Deposit" value="Deposit" />
-    <input type="submit" asp-action="Withdraw" value="Withdraw" />
+    <input type="submit" asp-action="Transfer" value="Transfer" />
 </form>

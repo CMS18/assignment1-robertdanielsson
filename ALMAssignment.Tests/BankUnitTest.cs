@@ -86,6 +86,38 @@ namespace ALMAssignment.Tests
             //Assert ArgumentOutOfRangeException
         }
 
+        [TestMethod]
+        public void Transfer()
+        {
+            //Arrange
+            decimal transferAmount = 20.25m;
+            var accountFrom = new Account();
+            accountFrom.Balance = 1500.23m;
+            var accountTo = new Account();
+            accountTo.Balance = 1234.44m;
+            //Act
+            accountFrom.Transfer(transferAmount, accountFrom, accountTo);
+            //Assert
+            Assert.AreEqual(1500.23m-transferAmount, accountFrom.Balance);
+            Assert.AreEqual(1234.44m+transferAmount, accountTo.Balance);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TransferTooMuchMoney()
+        {
+            //Arrange
+            decimal transferAmount = 20000m;
+            var accountFrom = new Account();
+            accountFrom.Balance = 0;
+            var accountTo = new Account();
+            accountTo.Balance = 1000m;
+            //Act
+            accountFrom.Transfer(transferAmount, accountFrom, accountTo);
+            //Assert ArgumentOutOfRangeException
+        }
+
         //Arrange
         //Act
         //Assert

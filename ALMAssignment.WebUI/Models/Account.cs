@@ -30,5 +30,18 @@ namespace ALMAssignment.WebUI.Models
 
             Balance -= withdrawAmount;
         }
+
+        public void Transfer(decimal transferAmount, Account accountFrom, Account accountTo)
+        {
+            if (transferAmount > 0 && accountFrom.Balance >= transferAmount)
+            {
+                accountFrom.Withdraw(transferAmount);
+                accountTo.Deposit(transferAmount);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }
