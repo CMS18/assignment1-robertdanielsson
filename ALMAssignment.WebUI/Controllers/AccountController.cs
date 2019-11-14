@@ -24,11 +24,6 @@ namespace ALMAssignment.WebUI.Controllers
             return View();
         }
 
-        public IActionResult Transfer()
-        {
-            return View();
-        }
-
         public IActionResult Deposit(decimal amount, int accountId)
         {
             var account = repo.Accounts.Where(m => m.AccountID == accountId).SingleOrDefault();
@@ -50,7 +45,7 @@ namespace ALMAssignment.WebUI.Controllers
                 }
             }
 
-            return RedirectToAction("Transfer");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Withdraw(decimal amount, int accountId)
@@ -74,6 +69,37 @@ namespace ALMAssignment.WebUI.Controllers
                 }
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Transfer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Transfer(decimal transferAmount, int accountIdFrom, int accountIdTo)
+        {
+            var accountFrom = repo.Accounts.SingleOrDefault(a => a.AccountID == accountIdFrom);
+            var accountTo = repo.Accounts.SingleOrDefault(a => a.AccountID == accountIdTo);
+
+            if (accountFrom == null || accountTo == null)
+            {
+                TempData["info"] = "Account id not found.";
+            }
+            else
+            {
+                try
+                {
+                    accountFrom.Transfer(transferAmount, accountFrom, accountTo);
+                    TempData["info"] = "Transfer successful, from account new balance: " + accountFrom.Balance + " To account new balance: " + accountTo.Balance;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    TempData["info"] = "Failed to transfer, make sure both accountIDs are valid and the amount doesnt exceed the balance.";
+                }
+            }
             return RedirectToAction("Transfer");
         }
     }
