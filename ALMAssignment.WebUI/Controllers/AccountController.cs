@@ -88,6 +88,10 @@ namespace ALMAssignment.WebUI.Controllers
             {
                 TempData["info"] = "Account id not found.";
             }
+            else if (accountFrom == accountTo)
+            {
+                TempData["info"] = "Account ids cannot be the same.";
+            }
             else
             {
                 try
